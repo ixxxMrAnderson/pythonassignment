@@ -72,7 +72,19 @@ public:
                 t = 0;
             }
         }
-        cout << "size:"<<num.size() << " num0:"<<num[0] << endl;
+        //cout << "size:"<<num.size() << " num0:"<<num[0] << endl;
+    }
+    string strB()
+    {
+        char Bstr[10000];
+        if (pst == 0) Bstr[0] = '-';
+        for (int i = 0; i < num.size(); ++i){
+            Bstr[1-pst+i] = num[i] + '0';
+            //cout << Bstr[1-pst+i] << " num "<<1-pst+i<<endl;
+        }
+        Bstr[1-pst+num.size()] = '\0';
+        //cout << Bstr[1-pst+num.size()]<<'\0'<<endl;
+        return Bstr;
     }
     void createB(string s)
     {

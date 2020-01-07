@@ -1168,6 +1168,38 @@ class EvalVisitor: public Python3BaseVisitor {
                     return Bigint(int(tmpatomexpr.as<bool>()));
                 }
             }
+            else if (atomexpr.is<string>()&& atomexpr.as<string>() == "str"){
+                antlrcpp::Any tmpatomexpr = trailerv[0];
+                if (tmpatomexpr.is<Bigint>()){
+                    string B2str;
+                    B2str = tmpatomexpr.as<Bigint>().strB();
+                    //cout << "in the print" << endl;
+                    //cout << B2str;
+                    return B2str;
+                }
+                else if (tmpatomexpr.is<double>()){
+                    double d2strdouble = tmpatomexpr.as<double>();
+                    string tmpqian = Bigint(int(d2strdouble)).strB();
+                    string tmphou = Bigint(d2strdouble - int(d2strdouble)).strB();
+                    string d2strans = tmpqian + "." + tmphou;
+                    return d2strans;
+                }
+                else if (tmpatomexpr.is<bool>()){
+                    if (tmpatomexpr.as<bool>()){
+                        string b2str;
+                        b2str = "True";
+                        return b2str;
+                    } else {
+                        string b2str;
+                        b2str = "False";
+                        return b2str;
+                    }
+                }
+                else if (tmpatomexpr.is<Nonetype>()){
+                    string n2str = "None";
+                    return n2str;
+                }
+            }
             else if (atomexpr.is<string>()&& atomexpr.as<string>() == "float"){
                 antlrcpp::Any tmpatomexpr = trailerv[0];
                 if (tmpatomexpr.is<string>()){
