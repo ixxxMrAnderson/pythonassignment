@@ -1363,7 +1363,7 @@ class EvalVisitor: public Python3BaseVisitor {
                     for (int i = 0; i < 6 - cntwei; ++i){
                         xiaoshu *= 10;
                     }
-                    cout << xiaoshu << endl;
+                    //cout << xiaoshu << endl;
                     string tmphou = Bigint(xiaoshu).strB();
                     d2strans += tmphou;
                     return d2strans;
