@@ -1325,6 +1325,9 @@ class EvalVisitor: public Python3BaseVisitor {
                     return tmpatomexpr.as<Bigint>();
                 }
                 else if (tmpatomexpr.is<double>()){
+                    if (tmpatomexpr.as<double>() < 0){
+                        return Bigint(int(tmpatomexpr.as<double>()) - 1);
+                    }
                     return Bigint(int(tmpatomexpr.as<double>()));
                 }
                 else if (tmpatomexpr.is<bool>()){
