@@ -102,6 +102,7 @@ public:
     {
         double Bdouble = 0;
         for (int i = num.size() - 1;i>=0;--i) {Bdouble += num[i]*pow(10,num.size() - i - 1);}
+        if (pst == 0) return Bdouble*(-1);
         return Bdouble;
     }
     operator bool() const

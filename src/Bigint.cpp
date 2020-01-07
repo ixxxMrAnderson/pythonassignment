@@ -239,6 +239,9 @@ Bigint Bdivide(Bigint x,Bigint y)
             t = 0;
         }
     }
+    if (tmpB.pst == 0 && !(tmpB * y == x)){
+        tmpB = tmpB - Bigint(1);
+    }
     return tmpB;
 }
 Bigint Bmod(const Bigint &x,const Bigint &y) {return (Bsubtract(x,Bmultiply(y,Bdivide(x,y))));}

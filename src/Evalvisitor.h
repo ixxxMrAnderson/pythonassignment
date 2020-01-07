@@ -238,21 +238,56 @@ class EvalVisitor: public Python3BaseVisitor {
             } else if (exprstr == "//=") {
                 if (exprl.is<double>()){
                     if (exprr.is<double>()){
-                        exprl = double(int(exprl.as<double>() / exprr.as<double>()));
+                        exprl = exprl.as<double>() / exprr.as<double>();
+                        if (exprl.as<double>() != int(exprl.as<double>())){
+                            if (exprl.as<double>() < 0){
+                                exprl = double(int(exprl.as<double>()) - 1);
+                            } else {
+                                exprl = double(int(exprl.as<double>()));
+                            }
+                        }
                     }
                     else if (exprr.is<Bigint>()){
-                        exprl = double(int(exprl.as<double>() / double(exprr.as<Bigint>())));
+                        exprl = exprl.as<double>() / double(exprr.as<Bigint>());
+                        if (exprl.as<double>() != int(exprl.as<double>())){
+                            if (exprl.as<double>() < 0){
+                                exprl = double(int(exprl.as<double>()) - 1);
+                            } else {
+                                exprl = double(int(exprl.as<double>()));
+                            }
+                        }
                     }
                     else if (exprr.is<bool>()){
-                        exprl = double(int(exprl.as<double>()));
+                        exprl = exprl.as<double>();
+                        if (exprl.as<double>() != int(exprl.as<double>())){
+                            if (exprl.as<double>() < 0){
+                                exprl = double(int(exprl.as<double>()) - 1);
+                            } else {
+                                exprl = double(int(exprl.as<double>()));
+                            }
+                        }
                     }
                 }
                 else if (exprr.is<double>()){
                     if (exprl.is<Bigint>()){
-                        exprl = double(int(double(exprl.as<Bigint>()) / exprr.as<double>()));
+                        exprl = double(exprl.as<Bigint>()) / exprr.as<double>();
+                        if (exprl.as<double>() != int(exprl.as<double>())){
+                            if (exprl.as<double>() < 0){
+                                exprl = double(int(exprl.as<double>()) - 1);
+                            } else {
+                                exprl = double(int(exprl.as<double>()));
+                            }
+                        }
                     }
                     else if (exprl.is<bool>()){
-                        exprl = double(int(double(exprl.as<bool>()) / exprr.as<double>()));
+                        exprl = double(exprl.as<bool>()) / exprr.as<double>();
+                        if (exprl.as<double>() != int(exprl.as<double>())){
+                            if (exprl.as<double>() < 0){
+                                exprl = double(int(exprl.as<double>()) - 1);
+                            } else {
+                                exprl = double(int(exprl.as<double>()));
+                            }
+                        }
                     }
                 }
                 else if (exprl.is<Bigint>()){
@@ -271,22 +306,67 @@ class EvalVisitor: public Python3BaseVisitor {
                 }
             } else if (exprstr == "%=") {
                 if (exprl.is<double>()){
-                    if (exprl.is<double>()){
-                        exprl = exprl.as<double>() - double(int(exprl.as<double>() / exprr.as<double>()));
+                    if (exprr.is<double>()){
+                        double qiuyud = exprl.as<double>();
+                        exprl = exprl.as<double>() / exprr.as<double>();
+                        if (exprl.as<double>() != int(exprl.as<double>())){
+                            if (exprl.as<double>() < 0){
+                                exprl = double(int(exprl.as<double>()) - 1);
+                            } else {
+                                exprl = double(int(exprl.as<double>()));
+                            }
+                        }
+                        exprl = qiuyud - exprl.as<double>();
                     }
                     else if (exprr.is<Bigint>()){
-                        exprl = exprl.as<double>() - double(int(exprl.as<double>() / double(exprr.as<Bigint>())));
+                        double qiuyud = exprl.as<double>();
+                        exprl = exprl.as<double>() / double(exprr.as<Bigint>());
+                        if (exprl.as<double>() != int(exprl.as<double>())){
+                            if (exprl.as<double>() < 0){
+                                exprl = double(int(exprl.as<double>()) - 1);
+                            } else {
+                                exprl = double(int(exprl.as<double>()));
+                            }
+                        }
+                        exprl = qiuyud - exprl.as<double>();
                     }
                     else if (exprr.is<bool>()){
-                        exprl = exprl.as<double>() - double(int(exprl.as<double>()));
+                        double qiuyud = exprl.as<double>();
+                        exprl = exprl.as<double>();
+                        if (exprl.as<double>() != int(exprl.as<double>())){
+                            if (exprl.as<double>() < 0){
+                                exprl = double(int(exprl.as<double>()) - 1);
+                            } else {
+                                exprl  = double(int(exprl.as<double>()));
+                            }
+                        }
+                        exprl = qiuyud - exprl.as<double>();
                     }
                 }
                 else if (exprr.is<double>()){
                     if (exprl.is<Bigint>()){
-                        exprl = double(exprl.as<Bigint>()) - double(int(double(exprl.as<Bigint>()) / exprr.as<double>()));
+                        double qiuyud = double(exprl.as<Bigint>());
+                        exprl = double(exprl.as<Bigint>()) / exprr.as<double>();
+                        if (exprl.as<double>() != int(exprl.as<double>())){
+                            if (exprl.as<double>() < 0){
+                                exprl = double(int(exprl.as<double>()) - 1);
+                            } else {
+                                exprl = double(int(exprl.as<double>()));
+                            }
+                        }
+                        exprl = qiuyud - exprl.as<double>();
                     }
                     else if (exprl.is<bool>()){
-                        exprl = double(exprl.as<bool>()) - double(int(double(exprl.as<bool>()) / exprr.as<double>()));
+                        double qiuyud = double(exprl.as<bool>());
+                        exprl = double(exprl.as<bool>()) / exprr.as<double>();
+                        if (exprl.as<double>() != int(exprl.as<double>())){
+                            if (exprl.as<double>() < 0){
+                                exprl = double(int(exprl.as<double>()) - 1);
+                            } else {
+                                exprl = double(int(exprl.as<double>()));
+                            }
+                        }
+                        exprl = qiuyud - exprl.as<double>();
                     }
                 }
                 else if (exprl.is<Bigint>()){
@@ -986,21 +1066,56 @@ class EvalVisitor: public Python3BaseVisitor {
             else if (mapterm[termarray[i - 1]] == "//"){
                 if (ansterm.is<double>()){
                     if (ret.is<double>()){
-                        ansterm = double(int(ansterm.as<double>() / ret.as<double>()));
+                        ansterm = ansterm.as<double>() / ret.as<double>();
+                        if (ansterm.as<double>() != int(ansterm.as<double>())){
+                            if (ansterm.as<double>() < 0){
+                                ansterm = double(int(ansterm.as<double>()) - 1);
+                            } else {
+                                ansterm = double(int(ansterm.as<double>()));
+                            }
+                        }
                     }
                     else if (ret.is<Bigint>()){
-                        ansterm = double(int(ansterm.as<double>() / double(ret.as<Bigint>())));
+                        ansterm = ansterm.as<double>() / double(ret.as<Bigint>());
+                        if (ansterm.as<double>() != int(ansterm.as<double>())){
+                            if (ansterm.as<double>() < 0){
+                                ansterm = double(int(ansterm.as<double>()) - 1);
+                            } else {
+                                ansterm = double(int(ansterm.as<double>()));
+                            }
+                        }
                     }
                     else if (ret.is<bool>()){
-                        ansterm = double(int(ansterm.as<double>()));
+                        ansterm = ansterm.as<double>();
+                        if (ansterm.as<double>() != int(ansterm.as<double>())){
+                            if (ansterm.as<double>() < 0){
+                                ansterm = double(int(ansterm.as<double>()) - 1);
+                            } else {
+                                ansterm = double(int(ansterm.as<double>()));
+                            }
+                        }
                     }
                 }
                 else if (ret.is<double>()){
                     if (ansterm.is<Bigint>()){
-                        ansterm = double(int(double(ansterm.as<Bigint>()) / ret.as<double>()));
+                        ansterm = double(ansterm.as<Bigint>()) / ret.as<double>();
+                        if (ansterm.as<double>() != int(ansterm.as<double>())){
+                            if (ansterm.as<double>() < 0){
+                                ansterm = double(int(ansterm.as<double>()) - 1);
+                            } else {
+                                ansterm = double(int(ansterm.as<double>()));
+                            }
+                        }
                     }
                     else if (ansterm.is<bool>()){
-                        ansterm = double(int(double(ansterm.as<bool>()) / ret.as<double>()));
+                        ansterm = double(ansterm.as<bool>()) / ret.as<double>();
+                        if (ansterm.as<double>() != int(ansterm.as<double>())){
+                            if (ansterm.as<double>() < 0){
+                                ansterm = double(int(ansterm.as<double>()) - 1);
+                            } else {
+                                ansterm = double(int(ansterm.as<double>()));
+                            }
+                        }
                     }
                 }
                 else if (ansterm.is<Bigint>()){
@@ -1021,21 +1136,66 @@ class EvalVisitor: public Python3BaseVisitor {
             else if (mapterm[termarray[i - 1]] == "%"){
                 if (ansterm.is<double>()){
                     if (ret.is<double>()){
-                        ansterm = ansterm.as<double>() - double(int(ansterm.as<double>() / ret.as<double>()));
+                        double qiuyud = ansterm.as<double>();
+                        ansterm = ansterm.as<double>() / ret.as<double>();
+                        if (ansterm.as<double>() != int(ansterm.as<double>())){
+                            if (ansterm.as<double>() < 0){
+                                ansterm = double(int(ansterm.as<double>()) - 1);
+                            } else {
+                                ansterm = double(int(ansterm.as<double>()));
+                            }
+                        }
+                        ansterm = qiuyud - ansterm.as<double>();
                     }
                     else if (ret.is<Bigint>()){
-                        ansterm = ansterm.as<double>() - double(int(ansterm.as<double>() / double(ret.as<Bigint>())));
+                        double qiuyud = ansterm.as<double>();
+                        ansterm = ansterm.as<double>() / double(ret.as<Bigint>());
+                        if (ansterm.as<double>() != int(ansterm.as<double>())){
+                            if (ansterm.as<double>() < 0){
+                                ansterm = double(int(ansterm.as<double>()) - 1);
+                            } else {
+                                ansterm = double(int(ansterm.as<double>()));
+                            }
+                        }
+                        ansterm = qiuyud - ansterm.as<double>();
                     }
                     else if (ret.is<bool>()){
-                        ansterm = ansterm.as<double>() - double(int(ansterm.as<double>()));
+                        double qiuyud = ansterm.as<double>();
+                        ansterm = ansterm.as<double>();
+                        if (ansterm.as<double>() != int(ansterm.as<double>())){
+                            if (ansterm.as<double>() < 0){
+                                ansterm = double(int(ansterm.as<double>()) - 1);
+                            } else {
+                                ansterm = double(int(ansterm.as<double>()));
+                            }
+                        }
+                        ansterm = qiuyud - ansterm.as<double>();
                     }
                 }
                 else if (ret.is<double>()){
                     if (ansterm.is<Bigint>()){
-                        ansterm = double(ansterm.as<Bigint>()) - double(int(double(ansterm.as<Bigint>()) / ret.as<double>()));
+                        double qiuyud = double(ansterm.as<Bigint>());
+                        ansterm = double(ansterm.as<Bigint>()) / ret.as<double>();
+                        if (ansterm.as<double>() != int(ansterm.as<double>())){
+                            if (ansterm.as<double>() < 0){
+                                ansterm = double(int(ansterm.as<double>()) - 1);
+                            } else {
+                                ansterm = double(int(ansterm.as<double>()));
+                            }
+                        }
+                        ansterm = qiuyud - ansterm.as<double>();
                     }
                     else if (ansterm.is<bool>()){
-                        ansterm = double(ansterm.as<bool>()) - double(int(double(ansterm.as<bool>()) / ret.as<double>()));
+                        double qiuyud = double(ansterm.as<bool>());
+                        ansterm = double(ansterm.as<bool>()) / ret.as<double>();
+                        if (ansterm.as<double>() != int(ansterm.as<double>())){
+                            if (ansterm.as<double>() < 0){
+                                ansterm = double(int(ansterm.as<double>()) - 1);
+                            } else {
+                                ansterm = double(int(ansterm.as<double>()));
+                            }
+                        }
+                        ansterm = qiuyud - ansterm.as<double>();
                     }
                 }
                 else if (ansterm.is<Bigint>()){
