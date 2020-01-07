@@ -1161,6 +1161,9 @@ class EvalVisitor: public Python3BaseVisitor {
                     tmpintB.createB(tmpatomexpr.as<string>());
                     return tmpintB;
                 }
+                else if (tmpatomexpr.is<Bigint>()){
+                    return tmpatomexpr.as<Bigint>();
+                }
                 else if (tmpatomexpr.is<double>()){
                     return Bigint(int(tmpatomexpr.as<double>()));
                 }
@@ -1180,8 +1183,26 @@ class EvalVisitor: public Python3BaseVisitor {
                 else if (tmpatomexpr.is<double>()){
                     double d2strdouble = tmpatomexpr.as<double>();
                     string tmpqian = Bigint(int(d2strdouble)).strB();
-                    string tmphou = Bigint(d2strdouble - int(d2strdouble)).strB();
-                    string d2strans = tmpqian + "." + tmphou;
+                    double xiaoshu = d2strdouble - int(d2strdouble);
+                    if (xiaoshu == 0){
+                        tmpqian += ".000000";
+                        return tmpqian;
+                    }
+                    int cntwei = 0;
+                    while(xiaoshu < 1 && cntwei < 6){
+                        xiaoshu *= 10;
+                        cntwei++;
+                    }
+                    string d2strans = tmpqian + ".";
+                    for (int i = 0; i < cntwei - 1; ++i){
+                        d2strans += "0";
+                    }
+                    for (int i = 0; i < 6 - cntwei; ++i){
+                        xiaoshu *= 10;
+                    }
+                    cout << xiaoshu << endl;
+                    string tmphou = Bigint(xiaoshu).strB();
+                    d2strans += tmphou;
                     return d2strans;
                 }
                 else if (tmpatomexpr.is<bool>()){
@@ -1218,6 +1239,9 @@ class EvalVisitor: public Python3BaseVisitor {
                 }
                 else if (tmpatomexpr.is<Bigint>()){
                     return double(tmpatomexpr.as<Bigint>());
+                }
+                else if (tmpatomexpr.is<double>()){
+                    return tmpatomexpr.as<double>();
                 }
                 else if (tmpatomexpr.is<bool>()){
                     return double(tmpatomexpr.as<bool>());
