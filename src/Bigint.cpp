@@ -176,7 +176,7 @@ Bigint Bdivide(Bigint x,Bigint y)
 {
     memset(d,0,sizeof(d));
     bool jdd;
-    Bigint tmpB;
+    Bigint tmpB,cunx = x,cuny = y;
     tmpB.pst = 1;
     if (x.num[0] == 0 || x.pst == y.pst && !Bjudge(x,y))
     {
@@ -239,7 +239,8 @@ Bigint Bdivide(Bigint x,Bigint y)
             t = 0;
         }
     }
-    if (tmpB.pst == 0 && !(tmpB * y == x)){
+    if (tmpB.pst == 0 && !(tmpB * cuny == cunx)){
+        //tmpB.printB();
         tmpB = tmpB - Bigint(1);
     }
     return tmpB;

@@ -1120,7 +1120,13 @@ class EvalVisitor: public Python3BaseVisitor {
                 }
                 else if (ansterm.is<Bigint>()){
                     if (ret.is<Bigint>()){
+                        //ansterm.as<Bigint>().printB();
+                        //cout << endl;
+                        //ret.as<Bigint>().printB();
+                        //cout << endl;
                         ansterm = ansterm.as<Bigint>() / ret.as<Bigint>();
+                        //ansterm.as<Bigint>().printB();
+                        //cout << endl;
                     }
                     else if (ret.is<bool>()){
                         ansterm = ansterm.as<Bigint>();
