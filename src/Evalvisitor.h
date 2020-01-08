@@ -397,13 +397,17 @@ class EvalVisitor: public Python3BaseVisitor {
                 }
                 return 0;
             }
+            vector<antlrcpp::Any> lzhi;
             for (int i = 0; i < exprtestlen; ++i){
                 antlrcpp::Any expronlyr = visit(ctx->testlist()[exprlength - 1]->test()[i]);
+                lzhi.push_back(expronlyr);
+            }
+            for (int i = 0; i < exprtestlen; ++i){
                 for (int j = 0; j < exprlength - 1; ++j) {
                     string expralll = ctx->testlist()[j]->test()[i]->or_test()->and_test()[0]->not_test()[0]->comparison()->arith_expr()[0]->term()[0]->factor()[0]->atom_expr()->atom()->NAME()->getText();
-                    namestack[namestack.size()-1][expralll] = expronlyr;
+                    namestack[namestack.size()-1][expralll] = lzhi[i];
                     //if (mapName[expralll].is<double>())
-                      //  cout << "valueinthemap:" << mapName[expralll].as<double>() << endl;
+                    //  cout << "valueinthemap:" << mapName[expralll].as<double>() << endl;
                 }
             }
             return visitChildren(ctx);
@@ -584,12 +588,11 @@ class EvalVisitor: public Python3BaseVisitor {
             return visit(ctx->arith_expr(0));
         }
         vector<antlrcpp::Any> compvector;
-        for (int i = 0; i <= ctx->comp_op().size(); ++i) {
-            compvector.push_back(visit(ctx->arith_expr(i)));
-        }
+        compvector.push_back(visit(ctx->arith_expr()[0]));
         for (int i = 0; i < ctx->comp_op().size(); ++i) {
             string compstr = visit(ctx->comp_op(i));
-            antlrcpp::Any retl = compvector[i],retr = compvector[i + 1];
+            antlrcpp::Any retl = compvector[i],retr = visit(ctx->arith_expr()[i + 1]);
+            compvector.push_back(retr);
             if (compstr == ">"){
                 if (retl.is<string>()) {
                     const char* retcharl = retl.as<string>().c_str();
