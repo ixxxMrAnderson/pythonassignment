@@ -51,7 +51,7 @@ public:
         if (x < 0) {pst = 0;x*=(-1);}
         else pst = 1;
         int cntc = 0;
-        int cB[10005]{0};
+        int cB[100005]{0};
         if (x == 0) {
             num.push_back(0);
             return;
@@ -64,7 +64,7 @@ public:
             cntc++;
         }
         int t = 1;
-        for (long int i = 10000;i >= 0; --i)
+        for (long int i = 100000;i >= 0; --i)
         {
             if (cB[i] != 0 || t == 0)
             {
@@ -76,7 +76,7 @@ public:
     }
     string strB()
     {
-        char Bstr[10000];
+        char Bstr[100000];
         if (pst == 0) Bstr[0] = '-';
         for (int i = 0; i < num.size(); ++i){
             Bstr[1-pst+i] = num[i] + '0';
